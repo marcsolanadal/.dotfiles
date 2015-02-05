@@ -1,0 +1,229 @@
+
+;; ----------------------------------------------------------------------------
+;; Package
+;; ----------------------------------------------------------------------------
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives
+             '("elpy" . "http://jorgenschaefer.github.io/packages/") t)
+
+(package-initialize)
+
+(defvar my-packages '(better-defaults
+                      clojure-mode
+                      cider
+		      evil
+		      evil-leader
+                      paredit
+                      company
+                      projectile
+                      flx-ido
+		      rainbow-delimiters))
+
+(dolist (p my-packages)
+  (unless (package-installed-p p)
+    (package-install p)))
+
+(package-initialize)
+
+;; ----------------------------------------------------------------------------
+;; General
+;; ----------------------------------------------------------------------------
+
+;; Color theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;;(load-theme 'brin t)
+(load-theme 'wilson t)
+
+;;(require 'color-theme)
+;;(color-theme-initialize)
+;;(color-theme-gnome2)
+
+;; Disable startup message
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)  
+;; Disable all GUI bars
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+;;(tabbar-mode -1)
+
+;; Disable backup files
+(setq make-backup-files nil)
+
+;; Activate line numbers
+;;(global-linum-mode t)
+;;(column-number-mode t)
+;;(setq linum-format "%4d \u2502")
+
+;; Change Yes/No to Y/N
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Follow symlinks by default
+(setq vc-follow-symlinks t)
+
+;; ----------------------------------------------------------------------------
+;; flx-ido
+;; ----------------------------------------------------------------------------
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+;; ----------------------------------------------------------------------------
+;; Evil
+;; ----------------------------------------------------------------------------
+(require 'evil)
+
+;; Solve problem with the leader not working on some modes
+;;(setq evil-leader/in-all-states 1)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+
+;; Set evil mode
+(evil-mode 1)
+
+;; Shortcurts
+(evil-leader/set-key
+
+  "ee" (lambda() (interactive)(find-file "~/.emacs"))
+  "eb" (lambda() (interactive)(find-file "~/.bashrc"))
+  "et" (lambda() (interactive)(find-file "~/.tmux.conf"))
+
+  "d" (lambda () (interactive)(dired "~/"))
+  ;;"dc" (lambda () (interactive)(dired "~/development/clojure/clojure-noob"))
+
+  "p" (lambda() (interactive)(list-packages)(delete-other-windows))
+  "u" 'undo-tree-visualize
+
+  "w" 'save-buffer
+  "j" 'next-buffer
+  "k" 'previous-buffer
+
+  ;; Window movements
+  ;;"h" 'windmove-left
+  ;;"l" 'windmove-right
+  ;;"j" 'windmove-down
+  ;;"k" 'windmove-up
+
+  ;; Window managements
+  ;;"q" 'delete-window
+  "q" (lambda() (interactive)(save-buffer)(kill-window))
+  "f" 'delete-other-windows
+
+  
+  ;; Window splits
+  "\\" 'split-window-horizontally
+  "\-" 'split-window-vertically
+
+  ;; Cider
+  "cc" 'cider-eval-last-sexp-to-repl
+  "ck" 'cider-eval-buffer
+  "cj" 'cider-jack-in
+
+  )
+
+;;(defun cider-mode-hook ()
+;;  (local-set-key (kbd "e") 'cider-eval-last-sexp))
+;;
+;;(add-hook 'clojure 'cider-mode-hook)
+
+;;(add-hook 'emacs-lisp-mode-hook 'evil-paredit-mode)
+
+(global-company-mode)
+
+(add-hook 'clojure-mode-hook #'paredit-mode)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
+(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+
+(windmove-default-keybindings)
+(setq windmove-wrap-around t)
+
+;; ----------------------------------------------------------------------------
+;; Cider + Auto-complete Cider
+;; ----------------------------------------------------------------------------
+
+;; Disable auto-selection of the error buffer when displayed
+(setq cider-auto-select-error-buffer nil)
+
+;; Enable rainbow-delimiters on the REPL
+(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+
+;; -------------------------------------------------------------------
+;; Mode-line customization
+;; -------------------------------------------------------------------
+;;(add-hook 'emacs-lisp-mode-hook
+;;          (lambda ()
+;;            (face-remap-add-relative
+;;             'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line)
+
+;; -------------------------------------------------------------------
+;; Undo tree
+;; -------------------------------------------------------------------
+;;(global-undo-tree-mode)
+;;(setq undo-tree-visualizer-timestamps t)
+;;;;(setq undo-tree-visualizer-diff t)
+;;(defadvice undo-tree-visualize (around undo-tree-split-side-by-side activate)
+;;  "Split undo-tree side-by-side"
+;;  (let ((split-height-threshold nil)
+;;        (split-width-threshold 0))
+;;  ad-do-it))
+
+;; ----------------------------------------------------------------------------
+;; Rainbow delimiters
+;; ----------------------------------------------------------------------------
+(require 'rainbow-delimiters)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+
+;; -------------------------------------------------------------------
+;; Helm + Projectile
+;; -------------------------------------------------------------------
+(projectile-global-mode)
+
+
+;;(require 'helm-config)
+;;(require 'helm-projectile)
+;;
+;;;; Rebind tab to run persistent action
+;;(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;;
+;;;; Make TAB works in terminal
+;;(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+;;
+;;;; List actions using C-z
+;;(define-key helm-map (kbd "C-z") 'helm-select-action)
+;;
+;;(setq helm-split-window-in-side-p t
+;;      helm-buffers-fuzzy-matching t
+;;      helm-recentf-fuzzy-match t
+;;      helm-move-to-line-cycle-in-source t
+;;      helm-ff-search-library-in-sexp t
+;;      helm-scroll-amount 8
+;;      helm-ff-file-name-history-use-recentf t
+;;      helm-quick-update t
+;;      helm-bookmark-show-location t)
+;;
+;;(setq helm-autoresize-max-height helm-autoresize-min-height)
+;;
+;;(helm-mode 1)
+
+;; -------------------------------------------------------------------
+;; Coffee-Script
+;; -------------------------------------------------------------------
+(custom-set-variables
+ '(coffee-tab-width 2))
+
+;; -------------------------------------------------------------------
+;; Javascript
+;; -------------------------------------------------------------------
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)

@@ -1,0 +1,320 @@
+
+" ------------------------------------------------------------------------------
+" VUNDLE
+" ------------------------------------------------------------------------------
+
+" Installing Vundle if it's not in the system.
+let vundle_installed = 0
+let vundle_readme = expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let vundle_installed = 1
+endif
+
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Vundle
+Bundle 'gmarik/vundle'
+
+" Interface
+Bundle 'bling/vim-airline'
+"Bundle 'bling/vim-bufferline'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'christoomey/vim-tmux-navigator'
+
+" Workflow
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+
+" Clojure
+Bundle 'tpope/vim-fireplace'
+Bundle 'vim-scripts/paredit.vim'
+Bundle 'guns/vim-clojure-static'
+Bundle 'amdt/vim-niji'
+
+" Web development
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'pangloss/vim-javascript'
+Bundle 'elzr/vim-json'
+"Bundle 'marijnh/tern_for_vim'
+
+if vundle_installed == 1
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
+
+" ------------------------------------------------------------------------------
+" GENERAL
+" ------------------------------------------------------------------------------
+
+syntax on                     " Enabling syntax highlighting
+filetype plugin indent on     " Enabling indentation
+
+colorscheme jellybeans
+
+" ------------------------------------------------------------------------------
+" Visual
+" ------------------------------------------------------------------------------
+set t_Co=256                  " Forcing vim acting with 256 color scheme
+set guioptions-=m             " Disable menubar
+set guioptions-=T             " Disable toolbar
+set guioptions+=LlRrb         " Needed to really disable the scrollbars in gui
+set guioptions-=LlRrb         " Disable all scrollbars
+set number                    " Displays the number line
+set cursorline                " Displays the line of the cursor
+set numberwidth=1             " Min width of the number column to the left
+set list                      " Show tabs, trail spaces and invisible spaces
+set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
+set showbreak=↪               " Character showed when line break
+
+" ------------------------------------------------------------------------------
+" Behaviour
+" ------------------------------------------------------------------------------
+set scrolloff=10          " Set the scroll to 10 lines of the top/bottom
+set hlsearch              " Highlight search terms
+set incsearch             " Show search matches as you type
+
+set nobackup              " No backup. File not keeped after write.
+set nowritebackup         " No backup. File not created before write.
+set noswapfile            " No swap file
+
+set history=1000          " Set history to max of 1000 entries
+set undolevels=500        " Use many levels of undo
+set visualbell            " Setting the visual bell insted of the sound
+set noerrorbells          " No sounds when error
+
+set pastetoggle=<F2>      " Unsing F2 to change to paste mode
+
+set formatoptions+=w
+set tw=80
+set backspace=indent,eol,start " allow backspacing over everything in insert
+set ts=2 sw=2 et
+
+"set expandtab
+set smarttab
+set shiftwidth=2
+set hidden
+set laststatus=2
+set ignorecase
+set ttyfast
+"set foldmethod=syntax
+
+set timeoutlen=1000       " Mapping delays
+set ttimeoutlen=10        " Key code delays
+                          " Solves a problem with ESC key
+
+" Tern configuration
+"let g:tern_map_keys=1
+"let g:tern_show_argument_hints='on_hold'
+
+" Omni completion
+"set omnifunc=syntaxcomplete#Complete
+"set completeopt=menu,preview
+
+set guifont=Monaco:h12
+
+" Line number color to white
+" hi clear CursorLine
+
+"hi CursorLineNr term=bold gui=bold guifg=White
+" hi CursorLineNr cterm=bold ctermfg=White
+" augroup CLClear
+"     autocmd! ColorScheme * hi clear CursorLine
+" augroup END
+
+"hi CursorLineNR cterm=bold
+" augroup CLNRSet
+"     autocmd! ColorScheme * hi CursorLineNR cterm=bold
+" augroup END
+
+" ------------------------------------------------------------------------------
+" MAPPINGS
+" ------------------------------------------------------------------------------
+
+" Leader
+let mapleader = "\\"
+"let mapleader = ","
+
+" Change ; for : to speed up the insertion of vim commands
+nnoremap ; :
+
+" Splits creation
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>h :split<CR>
+
+" Navigation tools
+nnoremap <Leader>a :e .<CR>
+nnoremap <Leader>s :CtrlP .<CR>
+nnoremap <Leader>d :CtrlPBuffer<CR>
+
+" Buffer movements
+"nnoremap <Leader>d :bp<CR>
+"nnoremap <Leader>f :bn<CR>
+
+" Special buffer operations
+nnoremap <Leader>q :close<CR>
+nnoremap <Leader>w :w!<CR>
+
+" Configuration files
+nnoremap <Leader>ev :e $MYVIMRC<CR>
+nnoremap <Leader>eb :e ~/.bashrc<CR>
+nnoremap <Leader>et :e ~/.tmux.conf<CR>
+
+" Session managment
+nnoremap <Silent><Leader>ss :mksession! $HOME/.vim/Session.vim<CR>
+nnoremap <Silent><Leader>sl :source $HOME/.vim/Session.vim<CR>
+
+" Misc
+inoremap <Leader>oo <C-x><C-o>
+nnoremap <Leader>g @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+" Clojure
+nnoremap ct :Require! <bar> Eval (clojure.test/run-tests)<CR>
+
+" Build with Grunt
+nnoremap <Leader>b :!grunt fullbuild<CR>
+nnoremap <Leader>bi :!grunt autoinstall_build<CR>
+nnoremap <Leader>bw :!grunt web_build<CR>
+
+" Mappings for tmux navigator
+if exists('$TMUX')
+    let g:tmux_navigator_no_mappings = 1
+    nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+    nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+    nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+    nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+    nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+else
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+endif
+
+" ==============================================================================
+" PLUGINS
+" ==============================================================================
+
+" -----------------------------------------------------------------------------
+" PAREDIT
+" -----------------------------------------------------------------------------
+"
+" Keymaps
+" -----------------------------------------------------------------------------
+" <leader>W (wrap)
+" <leader>S (splice)
+" <leader>O (split)
+" <leader>J (join)
+" <leader>I (raise subforms)
+" <leader>< (move parents left)
+" <leader>> (move parents right)
+"
+" Commands
+" -----------------------------------------------------------------------------
+" g:paredit_mode=0
+" g:paredit_electric_return=0
+" g:paredit_leader = ','
+
+" ------------------------------------------------------------------------------
+" VIM-AIRLINE
+" ------------------------------------------------------------------------------
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = 'none'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#overwrite_variables = 1
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+
+" Trailing whitespace
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = ''
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
+let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#whitespace#trailing_format = 'T: %s'
+let g:airline#extensions#whitespace#mixed_indent_format = 'MI: %s'
+
+" ------------------------------------------------------------------------------
+" VIM-BUFFERLINE
+" ------------------------------------------------------------------------------
+
+" Avoids displaying the bufferline below the statusline.
+let g:bufferline_echo = 0
+
+" ------------------------------------------------------------------------------
+" SYNTASTIC
+" ------------------------------------------------------------------------------
+
+" Colors
+highlight SyntasticErrorSign guifg=#dc322f guibg=#073642
+highlight SignColumn guibg=#073642
+
+" Options
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_enable_ballons = 0
+let g:syntastic_stl_format = '%E{E: %e}%B{ | }%W{W: %w}'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+
+" -----------------------------------------------------------------------------
+" CTRLP
+" ------------------------------------------------------------------------------
+
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" To change the default mappings
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+"
+" Set local working directory
+" 'c' - the directory of the current file.
+" 'r' - the nearest ancestor that contains one of these directories or
+"       files: .git .hg .svn .bzr _darcs
+" 'a' - like c, but only if the current working directory outside of CtrlP is
+"       not a direct ancestor of the directory of the current file.
+" Ignore directories using vim method
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+" set wildignore+=*/plugins/*,*/doc/*,*/node_modules/*,*/tmp/*
+
+" ------------------------------------------------------------------------------
+" AUTOCOMMANDS
+" ------------------------------------------------------------------------------
+
+" Removes trailing spaces
+function! TrimWhiteSpace()
+    %s/\s\+$//e
+endfunction
+
+if has("autocmd")
+    autocmd BufWritePre * :call TrimWhiteSpace()
+    autocmd BufWritePost .vimrc source $MYVIMRC
+    autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+endif
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+
+
