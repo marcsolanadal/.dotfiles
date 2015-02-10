@@ -66,6 +66,7 @@ colorscheme jellybeans
 " Visual
 " ------------------------------------------------------------------------------
 set t_Co=256                  " Forcing vim acting with 256 color scheme
+set term=screen-256color      " Needed to make background not bleed on tmux
 set guioptions-=m             " Disable menubar
 set guioptions-=T             " Disable toolbar
 set guioptions+=LlRrb         " Needed to really disable the scrollbars in gui
@@ -142,8 +143,8 @@ set guifont=Monaco:h12
 " ------------------------------------------------------------------------------
 
 " Leader
-let mapleader = "\\"
-"let mapleader = ","
+"let mapleader = "\\"
+let mapleader = ","
 
 " Change ; for : to speed up the insertion of vim commands
 nnoremap ; :

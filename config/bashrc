@@ -45,7 +45,7 @@ alias tree='tree -L 2 | more'
 alias rm='rm -rf'
 
 # Utility
-alias tmux="TERM=screen-256color-bce tmux -2"
+alias tmux="tmux -2"
 
 # Attach tmux session if there is one opened
 if [ "$(tmux list-sessions | grep "attached")" == "" ]; then
