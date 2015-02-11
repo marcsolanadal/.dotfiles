@@ -27,23 +27,23 @@ if [[ $charged_slots -gt $NUM_HEARTS ]]; then
   charged_slots=$NUM_HEARTS
 fi
 
-if [[ $charged_slots == $NUM_HEARTS ]]; then
+if [[ $charging == '' ]]; then
   echo -n $GOLD
   echo -n "$TRIFORCE_PART"
 else
-  if [[ $charging == '' ]]; then
+  if [[ $charged_slots == $NUM_HEARTS ]]; then
     echo -n $GOLD
     echo -n "$TRIFORCE_PART"
   else
     echo -n $RED
-  fi
-  for i in `seq 1 $charged_slots`; do
-    echo -n "$HEART"
-  done
-  if [[ $charged_slots -lt $NUM_HEARTS ]]; then
-    echo -n $GRAY
-    for i in `seq $charged_slots $NUM_HEARTS`; do
+    for i in `seq 1 $charged_slots`; do
       echo -n "$HEART"
     done
+    if [[ $charged_slots -lt $NUM_HEARTS ]]; then
+      echo -n $GRAY
+      for i in `seq $charged_slots $NUM_HEARTS`; do
+        echo -n "$HEART"
+      done
+    fi
   fi
 fi
