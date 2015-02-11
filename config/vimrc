@@ -154,9 +154,9 @@ nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>h :split<CR>
 
 " Navigation tools
-nnoremap <Leader>a :e .<CR>
-nnoremap <Leader>s :CtrlP .<CR>
+nnoremap <Leader>s :e .<CR>
 nnoremap <Leader>d :CtrlPBuffer<CR>
+nnoremap <Leader>f :CtrlP .<CR>
 
 " Buffer movements
 "nnoremap <Leader>d :bp<CR>
