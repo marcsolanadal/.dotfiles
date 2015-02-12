@@ -1,14 +1,24 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+[[ -f /etc/bashrc ]] && . /etc/bashrc
 
 export TERM="screen-256color"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
+
+# Load RVM into a shell session *as a function*
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+#export PATH=$PATH:/Applications/gradle-1.11/bin/
+#export ANDROID_HOME=/Applications/adt-bundle-mac-x86_64-20131030/sdk/
+
+export PATH=$PATH:/opt/jdk1.7.0_60/bin/
+export PATH=$PATH:/opt/adt-bundle-linux*/eclipse
+
+# Set CLICOLOR if you want Ansi Colors in iTerm2
+export CLICOLOR=1
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -27,20 +37,20 @@ fi
 unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-fi
+#if [ -x /usr/bin/dircolors ]; then
+#    #alias ls='ls --color=auto'
+#    alias grep='grep --color=auto'
+#fi
 
 # ALIAS
 
 # Navigation
 explore() {
-  cd $1 && ls --color=auto -l .
+  cd $1 && ls -l .
 }
 alias cd='explore'
 alias lh='ls -la'
-alias ls='ls -l --color=auto'
+#alias ls='ls -l'
 alias tree='tree -L 2 | more'
 alias rm='rm -rf'
 
@@ -48,12 +58,7 @@ alias rm='rm -rf'
 alias tmux="tmux -2"
 
 # Attach tmux session if there is one opened
-if [ "$(tmux list-sessions | grep "attached")" == "" ]; then
-    tmux attach
-fi
-
-export PATH=$PATH:/opt/jdk1.7.0_60/bin/
-export PATH=$PATH:/opt/adt-bundle-linux*/eclipse
+[[ "$(tmux list-sessions | grep "attached")" == "" ]] && tmux attach
 
 # Disable software flow control (Legacy from 80's)
 stty -ixon
