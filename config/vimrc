@@ -34,6 +34,11 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" Forth
+Bundle 'forth.vim'
 
 " Clojure
 Bundle 'tpope/vim-fireplace'
@@ -207,6 +212,15 @@ endif
 " ==============================================================================
 
 " -----------------------------------------------------------------------------
+" ULTISNIPS
+" -----------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=["~/.dotfiles/ultisnips"]
+
+" -----------------------------------------------------------------------------
 " PAREDIT
 " -----------------------------------------------------------------------------
 "
@@ -312,6 +326,7 @@ if has("autocmd")
     autocmd BufWritePost .vimrc source $MYVIMRC
     autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    autocmd BufReadPost *.forth set syntax=forth
 endif
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929

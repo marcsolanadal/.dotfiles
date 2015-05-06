@@ -22,7 +22,7 @@ export CLICOLOR=1
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    screen-256color) color_prompt=yes
+  screen-256color)  color_prompt=yes
 esac
 
 if [ "$color_prompt" = yes ]; then
@@ -45,20 +45,22 @@ unset color_prompt force_color_prompt
 # ALIAS
 
 # Navigation
-explore() {
-  cd $1 && ls -l .
-}
-alias cd='explore'
+#explore() {
+#  cd $1 && ls -l .
+#}
+#alias cd='explore'
 alias lh='ls -la'
-#alias ls='ls -l'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 alias tree='tree -L 2 | more'
 alias rm='rm -rf'
 
 # Utility
 alias tmux="tmux -2"
+alias consrv="ssh -i ~/.ssh/id_rsa ionthas@95.85.1.209"
 
 # Attach tmux session if there is one opened
 [[ "$(tmux list-sessions | grep "attached")" == "" ]] && tmux attach
 
 # Disable software flow control (Legacy from 80's)
-stty -ixon
+#stty -ixon
