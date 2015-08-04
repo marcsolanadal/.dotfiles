@@ -14,7 +14,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 #export PATH=$PATH:/Applications/gradle-1.11/bin/
 #export ANDROID_HOME=/Applications/adt-bundle-mac-x86_64-20131030/sdk/
 
-export PATH=$PATH:/opt/jdk1.7.0_60/bin/
+export PATH=$PATH:/opt/jdk1.7.0_60/bin
 export PATH=$PATH:/opt/adt-bundle-linux*/eclipse
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2
@@ -60,7 +60,7 @@ alias tmux="tmux -2"
 alias consrv="ssh -i ~/.ssh/id_rsa ionthas@95.85.1.209"
 
 # Attach tmux session if there is one opened
-[[ "$(tmux list-sessions | grep "attached")" == "" ]] && tmux attach
+#[[ "$(tmux list-sessions | grep "attached")" == "" ]] && tmux attach
 
 # Disable software flow control (Legacy from 80's)
 #stty -ixon
