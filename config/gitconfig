@@ -1,0 +1,8 @@
+[user]
+	name = Marc Solà Nadal
+	email = ionthasMail@gmail.com
+[core]
+	editor = vim
+	autocrlf = input
+[commit]
+  template = ~/.gitmessage

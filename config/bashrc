@@ -17,6 +17,8 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 export PATH=$PATH:/opt/jdk1.7.0_60/bin
 export PATH=$PATH:/opt/adt-bundle-linux*/eclipse
 
+export PATH=$PATH:~/bin
+
 # Set CLICOLOR if you want Ansi Colors in iTerm2
 export CLICOLOR=1
 
@@ -57,10 +59,9 @@ alias rm='rm -rf'
 
 # Utility
 alias tmux="tmux -2"
-alias consrv="ssh -i ~/.ssh/id_rsa ionthas@95.85.1.209"
 
-# Attach tmux session if there is one opened
-#[[ "$(tmux list-sessions | grep "attached")" == "" ]] && tmux attach
+## Attach to tmux session
+(tmux ls | grep -vq attached && tmux attach)
 
 # Disable software flow control (Legacy from 80's)
-#stty -ixon
+stty -ixon

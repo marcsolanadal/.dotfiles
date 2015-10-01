@@ -25,10 +25,6 @@ Bundle 'gmarik/vundle'
 
 " Interface
 Bundle 'bling/vim-airline'
-"Bundle 'bling/vim-bufferline'
-"Bundle 'fxn/vim-monochrome'
-"Bundle 'tpope/vim-vividchalk'
-"Bundle 'Lokaltog/vim-distinguished'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 
@@ -37,11 +33,13 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
-"Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets'
+Bundle 'SirVer/ultisnips'
+Bundle 'Raimondi/delimitMate'
 
-" Forth
-"Bundle 'forth.vim'
+" Misc tools
+Bundle 'wakatime/vim-wakatime'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 
 " Clojure
 Bundle 'tpope/vim-fireplace'
@@ -49,15 +47,13 @@ Bundle 'vim-scripts/paredit.vim'
 Bundle 'guns/vim-clojure-static'
 Bundle 'guns/vim-clojure-highlight'
 Bundle 'luochen1990/rainbow'
-"Bundle 'kien/rainbow_parentheses.vim'
-"Bundle 'vim-scripts/vim-niji'
 
 " Web development
 "Bundle 'kchmck/vim-coffee-script'
-Bundle 'pangloss/vim-javascript'
 Bundle 'elzr/vim-json'
+Bundle 'pangloss/vim-javascript'
 Bundle 'jelera/vim-javascript-syntax'
-Bundle 'marijnh/tern_for_vim'
+"Bundle 'marijnh/tern_for_vim'
 
 if vundle_installed == 1
     echo "Installing Bundles, please ignore key map error messages"
@@ -339,7 +335,7 @@ endfunction
 
 if has("autocmd")
     autocmd BufWritePre * :call TrimWhiteSpace()
-    autocmd BufWritePost .vimrc source $MYVIMRC
+    "autocmd BufWritePost .vimrc source $MYVIMRC
     autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     autocmd BufReadPost *.forth set syntax=forth
@@ -347,6 +343,3 @@ endif
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
-
-
-
