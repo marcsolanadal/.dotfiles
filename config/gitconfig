@@ -7,5 +7,6 @@
 [commit]
   template = ~/.gitmessage
 [github]
-	token = 4f728f8cd4b4edbb70ce06f28c51ee4d55541512
 	user = marcsolanadal
+[push]
+	default = simple
