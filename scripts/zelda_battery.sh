@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HEART='♥'
-TRIFORCE_PART='▲ '
+TRIFORCE_PART='▲'
 NUM_HEARTS=10
 
 # Zenburn colors
@@ -34,6 +34,7 @@ else
   if [[ $charged_slots == $NUM_HEARTS ]]; then
     echo -n $GOLD
     echo -n "$TRIFORCE_PART"
+    echo -n " "
   else
     echo -n $RED
     for i in `seq 1 $charged_slots`; do
@@ -45,5 +46,6 @@ else
         echo -n "$HEART"
       done
     fi
+    echo -n " "
   fi
 fi
