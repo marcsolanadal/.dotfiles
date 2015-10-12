@@ -20,10 +20,11 @@ ln -s ~/.dotfiles/config/gitmessage ~/.gitmessage
 rm -rf ~/.vim ~/.vimrc
 ln -s ~/.dotfiles/config/vimrc ~/.vimrc
 
-
 rm -rf ~/.emacs ~/.bashrc ~/.tmux.conf ~/.bash_profile ~/.irssi
 
-ln -s ~/.dotfiles/config/bashrc ~/.bashrc
-ln -s ~/.dotfiles/config/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/config/bash_profile ~/.bash_profile
+ln -s ~/.dotfiles/config/bashrc ~/.bashrc
+
+ln -s ~/.dotfiles/config/zshrc ~/.zshrc
+ln -s ~/.dotfiles/config/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/config/.irssi ~/.irssi
