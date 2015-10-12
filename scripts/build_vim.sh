@@ -4,6 +4,7 @@ PREP_COMPLETE=false
 
 PREFIX="/opt/local"
 LUA_PREFIX=""
+PYTHON_PREFIX=""
 
 # Downlading vim sources into temporal folder
 cd /tmp
@@ -20,7 +21,8 @@ if [ "$(uname)" == "Darwin" ]; then
   echo "Mac OS detected..."
   echo "Installing required packages to build vim..."
 
-  LUA_PREFIX="/usr/local/Cellar/lua51/5.1.2_2"
+  LUA_PREFIX="/usr/local/Cellar/lua51/5.1.5_2"
+  PYTHON_PREFIX="/usr/lib/python2.7/config/"
 
   brew install lua luajit python3 > /dev/null
 
@@ -33,6 +35,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   echo "Installing required packages to build vim..."
 
   LUA_PREFIX="/usr/include/lua5.1"
+  PYTHON_PREFIX="/usr/lib/python2.7/config-x86_64-linux-gnu/"
 
   # Install necessary packages for lua and python support
   sudo apt-get install -y liblua5.1-dev luajit libluajit-5.1 python-dev > /dev/null
@@ -71,15 +74,14 @@ if [ "$PREP_COMPLETE" = true ]; then
     --enable-cscope \
     --enable-fail-if-missing \
     --enable-pythoninterp \
-    --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/
-
+    --with-python-config-dir=$PYTHON_PREFIX
   make
   make install
 
 fi
 
-# Generating the corresponging symbolic links
-
+# Cleaning the installation folder
+cd ..
 rm -rf /tmp/vim
 
-
+# Generating the corresponging symbolic links

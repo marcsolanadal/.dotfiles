@@ -51,8 +51,8 @@ unset color_prompt force_color_prompt
 #  cd $1 && ls -l .
 #}
 #alias cd='explore'
-alias lh='ls -la'
-alias ls='ls --color=auto'
+#alias lh='ls -la'
+#alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias tree='tree -L 2 | more'
 alias rm='rm -rf'
