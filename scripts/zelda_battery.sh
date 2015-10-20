@@ -30,6 +30,7 @@ fi
 if [[ $charging == '' ]]; then
   echo -n $GOLD
   echo -n "$TRIFORCE_PART"
+  echo -n " "
 else
   if [[ $charged_slots == $NUM_HEARTS ]]; then
     echo -n $GOLD

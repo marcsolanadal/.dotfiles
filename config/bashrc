@@ -19,6 +19,12 @@ export PATH=$PATH:/opt/adt-bundle-linux*/eclipse
 
 export PATH=$PATH:~/bin
 
+export ANDROID_HOME=/Users/msola/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/build-tools/23.0.1
+
+
 # Set CLICOLOR if you want Ansi Colors in iTerm2
 export CLICOLOR=1
 
@@ -51,8 +57,8 @@ unset color_prompt force_color_prompt
 #  cd $1 && ls -l .
 #}
 #alias cd='explore'
-alias lh='ls -la'
-alias ls='ls --color=auto'
+# alias lh='ls -la'
+#alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias tree='tree -L 2 | more'
 alias rm='rm -rf'

@@ -1,3 +1,4 @@
+```
 .
 ├── config
 │   ├── bash_profile
@@ -15,3 +16,4 @@
     ├── build_vim.sh
     ├── get_bitstamp_price.sh
     └── zelda_battery.sh
+```
