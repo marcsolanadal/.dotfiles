@@ -8,10 +8,22 @@ zstyle ':completion:*' insert-tab false
 alias prep='rm -r www/*; cp -r www-dev/* www/'
 alias andr='prep && cordova prepare android && cordova run android'
 
+alias glg='git log --oneline --graph --all --decorate'
+
+alias at='cd $HOME/repos/atsistemas'
+alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -l'
+alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -l'
+alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -l'
+
+alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
+
 setopt rmstarsilent
 
 export PATH=/opt/local/bin:$PATH
 export PATH=$PATH:/bin
+
+# MySQL path
+export PATH=$PATH:/usr/local/mysql/bin
 
 # Node path
 export NODE_PATH=/usr/local/bin:/usr/local/lib/node_modules
@@ -29,7 +41,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+#plugins=(git)
 
 # User configuration
 

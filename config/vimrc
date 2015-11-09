@@ -27,23 +27,23 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'morhetz/gruvbox'
-"Bundle 'nanotech/jellybeans.vim'
 
 " Workflow
 Bundle 'kien/ctrlp.vim'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/neosnippet.vim'
-Bundle 'honza/vim-snippets'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
-"Bundle 'SirVer/ultisnips'
+Bundle 'tpope/vim-dispatch'
 Bundle 'Raimondi/delimitMate'
 
 " Misc tools
 Bundle 'wakatime/vim-wakatime'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'wikitopian/hardmode'
 
 " Clojure
 Bundle 'tpope/vim-fireplace'
@@ -75,12 +75,6 @@ filetype plugin indent on     " Enabling indentation
 colorscheme gruvbox
 set background=dark
 
-"colorscheme jellybeans
-"colorscheme monochrome
-"colorscheme vividchalk
-"colorscheme distinguished
-"colorscheme slate
-
 " ------------------------------------------------------------------------------
 " Visual
 " ------------------------------------------------------------------------------
@@ -90,9 +84,10 @@ set guioptions-=m             " Disable menubar
 set guioptions-=T             " Disable toolbar
 set guioptions+=LlRrb         " Needed to really disable the scrollbars in gui
 set guioptions-=LlRrb         " Disable all scrollbars
-set number                    " Displays the number line
+"set number                    " Displays the number line
 set cursorline                " Displays the line of the cursor
 set numberwidth=1             " Min width of the number column to the left
+set colorcolumn=81            " Displays a column at 80 chars
 set list                      " Show tabs, trail spaces and invisible spaces
 set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
 set showbreak=↪               " Character showed when line break
@@ -100,7 +95,7 @@ set showbreak=↪               " Character showed when line break
 " ------------------------------------------------------------------------------
 " Behaviour
 " ------------------------------------------------------------------------------
-set scrolloff=10          " Set the scroll to 10 lines of the top/bottom
+set scrolloff=5          " Set the scroll to 5 lines of the top/bottom
 set hlsearch              " Highlight search terms
 set incsearch             " Show search matches as you type
 
@@ -120,7 +115,6 @@ set tw=80
 set backspace=indent,eol,start " allow backspacing over everything in insert
 set ts=2 sw=2 et
 
-
 "set expandtab
 set smarttab
 set shiftwidth=2
@@ -128,12 +122,17 @@ set hidden
 set laststatus=2
 set ignorecase
 set ttyfast
-"set foldmethod=syntax
+
+"folding settings
+set foldmethod=syntax     "fold based on indent
+set foldnestmax=10        "deepest fold is 10 levels
+set nofoldenable          "dont fold by default
+set foldlevel=1           "this is just what i use
 
 set timeoutlen=1000       " Mapping delays
 set ttimeoutlen=10        " Key code delays
                           " Solves a problem with ESC key
-
+set relativenumber
 " Tern configuration
 "let g:tern_map_keys=1
 "let g:tern_show_argument_hints='on_hold'
@@ -168,18 +167,18 @@ let mapleader = ","
 
 " Ergonomy
 "nnoremap ; :
-inoremap jj <ESC>
+inoremap jk <ESC>
 
 " Learning
-noremap h <NOP>
-noremap j <NOP>
-noremap k <NOP>
-noremap l <NOP>
-
-" Codeflow improvements
-inoremap {<CR> {<CR>}<C-o>O<TAB>
-inoremap [<CR> [<CR>]<C-o>O<TAB>
-inoremap (<CR> (<CR>)<C-o>O<TAB>
+"noremap h <NOP>
+"noremap j <NOP>
+"noremap k <NOP>
+"noremap l <NOP>
+"
+"" Codeflow improvements
+"inoremap {<CR> {<CR>}<C-o>O<TAB>
+"inoremap [<CR> [<CR>]<C-o>O<TAB>
+"inoremap (<CR> (<CR>)<C-o>O<TAB>
 
 " Splits creation
 nnoremap <Leader>v :vsplit<CR>
@@ -218,6 +217,9 @@ nnoremap ct :Require! <bar> Eval (clojure.test/run-tests)<CR>
 nnoremap <Leader>b :!grunt fullbuild<CR>
 nnoremap <Leader>bi :!grunt autoinstall_build<CR>
 nnoremap <Leader>bw :!grunt web_build<CR>
+
+" Gulp mlm maps
+nnoremap <Leader>gd :!gulp reset &; sleep 4; gulp populate<CR>
 
 " Mappings for tmux navigator
 if exists('$TMUX')
@@ -312,7 +314,7 @@ let g:bufferline_echo = 0
 " ------------------------------------------------------------------------------
 
 " Checkers
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Colors
 highlight SyntasticErrorSign guifg=#dc322f guibg=#073642
@@ -355,7 +357,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.dotfiles/vim/snippets'
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -376,10 +378,10 @@ endif"
 " ------------------------------------------------------------------------------
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 
-"" Disable AutoComplPop.
+" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 
-"Use neocomplete.
+" Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 
 " Use smartcase.
@@ -438,5 +440,7 @@ if has("autocmd")
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 endif
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+
+
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
