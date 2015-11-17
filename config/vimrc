@@ -27,6 +27,7 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'morhetz/gruvbox'
+Bundle 'airblade/vim-gitgutter'
 
 " Workflow
 Bundle 'kien/ctrlp.vim'
@@ -36,24 +37,25 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-dispatch'
-Bundle 'Raimondi/delimitMate'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-commentary'
+Bundle 'jiangmiao/auto-pairs'
 
 " Misc tools
 Bundle 'wakatime/vim-wakatime'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
-Bundle 'airblade/vim-gitgutter'
 Bundle 'wikitopian/hardmode'
+Bundle 'editorconfig/editorconfig-vim'
 
-" Clojure
-Bundle 'tpope/vim-fireplace'
-Bundle 'vim-scripts/paredit.vim'
-Bundle 'guns/vim-clojure-static'
-Bundle 'guns/vim-clojure-highlight'
-Bundle 'luochen1990/rainbow'
+" " Clojure
+" Bundle 'tpope/vim-fireplace'
+" Bundle 'vim-scripts/paredit.vim'
+" Bundle 'guns/vim-clojure-static'
+" Bundle 'guns/vim-clojure-highlight'
+" Bundle 'luochen1990/rainbow'
 
 " Web development
-"Bundle 'kchmck/vim-coffee-script'
 Bundle 'elzr/vim-json'
 Bundle 'pangloss/vim-javascript'
 Bundle 'jelera/vim-javascript-syntax'
@@ -140,6 +142,7 @@ set relativenumber
 " Omni completion
 "set omnifunc=syntaxcomplete#Complete
 "set completeopt=menu,preview
+set completeopt-=preview
 
 set guifont=Monaco:h12
 
@@ -167,7 +170,7 @@ let mapleader = ","
 
 " Ergonomy
 "nnoremap ; :
-inoremap jk <ESC>
+"inoremap jk <ESC>
 
 " Learning
 "noremap h <NOP>
@@ -219,7 +222,12 @@ nnoremap <Leader>bi :!grunt autoinstall_build<CR>
 nnoremap <Leader>bw :!grunt web_build<CR>
 
 " Gulp mlm maps
-nnoremap <Leader>gd :!gulp reset &; sleep 4; gulp populate<CR>
+" nnoremap <Leader>gd :!gulp reset &; sleep 4; gulp populate<CR>
+nnoremap <Leader>gp :Dispatch! gulp prepare<CR>
+"nnoremap <Leader>gd :Dispatch! gulp deploy<CR>
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Mappings for tmux navigator
 if exists('$TMUX')
@@ -334,7 +342,7 @@ let g:syntastic_warning_symbol = '⚠'
 " ------------------------------------------------------------------------------
 
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 
 " To change the default mappings
 " let g:ctrlp_map = '<c-p>'
@@ -438,6 +446,16 @@ if has("autocmd")
     autocmd BufWritePre * :call TrimWhiteSpace()
     autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+endif
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  "let g:ctrlp_use_caching = 0
 endif
 
 

@@ -28,3 +28,6 @@ ln -s ~/.dotfiles/config/bashrc ~/.bashrc
 ln -s ~/.dotfiles/config/zshrc ~/.zshrc
 ln -s ~/.dotfiles/config/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/config/.irssi ~/.irssi
+
+# Install zsh theme
+ln -s ~/.dotfiles/config/zsh/ionthas.zsh-theme ~/.oh-my-zsh/themes/ionthas.zsh-theme

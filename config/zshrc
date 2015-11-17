@@ -5,17 +5,45 @@ ZSH_THEME="ionthas"
 
 zstyle ':completion:*' insert-tab false
 
+# ------------------------------------------------------------------------------
+# Productivity
+# ------------------------------------------------------------------------------
+
+# Git
+alias gg='git log --oneline --graph --all --decorate'
+alias gs='git status'
+alias gc='git commit'
+alias gd='git diff'
+alias gdc='git diff --cached'
+
+# ------------------------------------------------------------------------------
+# Current working projects
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# MLM
+# ------------------------------------------------------------------------------
+alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -lh'
+alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -lh'
+alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -lh'
+
+# Reset completely the mlm-back-v2 database
+alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
+
+# ------------------------------------------------------------------------------
+# Hybreed
+# ------------------------------------------------------------------------------
+
+# Cordova alias for hybreed projects
 alias prep='rm -r www/*; cp -r www-dev/* www/'
 alias andr='prep && cordova prepare android && cordova run android'
 
-alias glg='git log --oneline --graph --all --decorate'
+# ------------------------------------------------------------------------------
+# Personal
+# ------------------------------------------------------------------------------
+alias pg='cd ~/repos/gamedev; ls -lh'
+alias ca='cd ~/repos/gamedev/mincaf; ls -lh'
 
-alias at='cd $HOME/repos/atsistemas'
-alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -l'
-alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -l'
-alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -l'
-
-alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
 
 setopt rmstarsilent
 
@@ -36,16 +64,5 @@ export PATH=$PATH:$ANDROID_HOME/build-tools/23.0.1
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#plugins=(git)
-
-# User configuration
-
-#export PATH="/opt/local/bin:/usr/local/bin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/sbin:~/bin:/opt/jdk1.7.0_60/bin:/opt/adt-bundle-linux*/eclipse:/Users/msola/bin:/opt/jdk1.7.0_60/bin:/opt/adt-bundle-linux*/eclipse:/Users/msola/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
