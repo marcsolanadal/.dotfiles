@@ -8,14 +8,26 @@ zstyle ':completion:*' insert-tab false
 alias prep='rm -r www/*; cp -r www-dev/* www/'
 alias andr='prep && cordova prepare android && cordova run android'
 
+# Reset completely the mlm-back-v2 database
+alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
+
 alias glg='git log --oneline --graph --all --decorate'
 
-alias at='cd $HOME/repos/atsistemas'
-alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -l'
-alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -l'
-alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -l'
+# ------------------------------------------------------------------------------
+# Current working projects
+# ------------------------------------------------------------------------------
 
-alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
+# ATSistemas
+alias at='cd $HOME/repos/atsistemas'
+alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -lh'
+alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -lh'
+alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -lh'
+
+# Personal
+alias gd='cd ~/repos/gamedev; ls -lh'
+alias ca='cd ~/repos/gamedev/mincaf; ls -lh'
+
+# ------------------------------------------------------------------------------
 
 setopt rmstarsilent
 
@@ -36,12 +48,6 @@ export PATH=$PATH:$ANDROID_HOME/build-tools/23.0.1
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#plugins=(git)
 
 # User configuration
 
