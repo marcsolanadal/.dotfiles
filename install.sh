@@ -20,14 +20,17 @@ ln -s ~/.dotfiles/config/gitmessage ~/.gitmessage
 rm -rf ~/.vim ~/.vimrc
 ln -s ~/.dotfiles/config/vimrc ~/.vimrc
 
+# Setting up oh-my-zsh
+rm -rf ~/.zshrc ~/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+ln -s ~/.dotfiles/config/zshrc ~/.zshrc
+ln -s ~/.dotfiles/config/zsh/ionthas.zsh-theme ~/.oh-my-zsh/themes/ionthas.zsh-theme
+
+# Other programs
 rm -rf ~/.emacs ~/.bashrc ~/.tmux.conf ~/.bash_profile ~/.irssi
 
 ln -s ~/.dotfiles/config/bash_profile ~/.bash_profile
 ln -s ~/.dotfiles/config/bashrc ~/.bashrc
 
-ln -s ~/.dotfiles/config/zshrc ~/.zshrc
 ln -s ~/.dotfiles/config/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/config/.irssi ~/.irssi
-
-# Install zsh theme
-ln -s ~/.dotfiles/config/zsh/ionthas.zsh-theme ~/.oh-my-zsh/themes/ionthas.zsh-theme
