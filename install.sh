@@ -22,8 +22,8 @@ ln -s ~/.dotfiles/config/vimrc ~/.vimrc
 
 # Setting up oh-my-zsh
 rm -rf ~/.zshrc ~/.oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ln -s ~/.dotfiles/config/zshrc ~/.zshrc
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ln -s ~/.dotfiles/config/zsh/ionthas.zsh-theme ~/.oh-my-zsh/themes/ionthas.zsh-theme
 
 # Other programs
