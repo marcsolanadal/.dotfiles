@@ -1,3 +1,6 @@
+# Adding ssh keys to agent
+ssh-add $HOME/.ssh/ionid
+ssh-add $HOME/.ssh/msola-at
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
