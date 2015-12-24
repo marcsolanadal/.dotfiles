@@ -142,6 +142,9 @@ set relativenumber
 "let g:tern_map_keys=1
 "let g:tern_show_argument_hints='on_hold'
 
+set splitbelow
+set splitright
+
 " Omni completion
 "set omnifunc=syntaxcomplete#Complete
 "set completeopt=menu,preview
@@ -452,6 +455,11 @@ if has("autocmd")
     autocmd BufWritePre * :call TrimWhiteSpace()
     autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+endif
+
+if has('spell')
+    autocmd BufRead,BufNewFile *.md setlocal spell
+    autocmd FileType gitcommit setlocal spell
 endif
 
 " The Silver Searcher

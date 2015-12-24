@@ -16,6 +16,15 @@ alias gs='git status'
 alias gc='git commit'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias grh='git reset --hard HEAD'
+alias gcm='git checkout master'
+alias gcd='git checkout develop'
+
+# ------------------------------------------------------------------------------
+# Remote servers
+# ------------------------------------------------------------------------------
+alias devbox='ssh -i ~/.ssh/ionid ionthas@95.85.12.4'
+alias bbg='ssh -i ~/.ssh/ionid bug@'
 
 # ------------------------------------------------------------------------------
 # Current working projects
@@ -40,8 +49,6 @@ alias gde='cd ~/repos/gamedev; ls -lh'
 alias ca='cd ~/repos/gamedev/mincaf; ls -lh'
 
 # Servers
-alias devbox='ssh -i ~/.ssh/ionid ionthas@95.85.12.4'
-alias bbg='ssh -i ~/.ssh/ionid bug@'
 
 # ------------------------------------------------------------------------------
 
