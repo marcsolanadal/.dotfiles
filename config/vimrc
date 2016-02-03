@@ -232,12 +232,6 @@ nnoremap <Leader>bw :!grunt web_build<CR>
 nnoremap <Leader>gp :Dispatch! gulp prepare<CR>
 "nnoremap <Leader>gd :Dispatch! gulp deploy<CR>
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 " Mappings for tmux navigator
 if exists('$TMUX')
     let g:tmux_navigator_no_mappings = 1
@@ -347,8 +341,27 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 
 " -----------------------------------------------------------------------------
-" CTRLP
+" Searching
 " ------------------------------------------------------------------------------
+
+" bind K to grep word under cursor
+nnoremap \ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"nnoremap \ :Ag<SPACE>"
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
