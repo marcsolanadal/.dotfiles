@@ -1,5 +1,5 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/msola/.oh-my-zsh
+#1000 Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="ionthas"
 
@@ -24,7 +24,13 @@ alias gcd='git checkout develop'
 # Remote servers
 # ------------------------------------------------------------------------------
 alias devbox='ssh -i ~/.ssh/ionid ionthas@95.85.12.4'
-alias bbg='ssh -i ~/.ssh/ionid bug@'
+alias bbg='ssh -i ~/.ssh/ionid bug@bigbuggames.com'
+
+# ------------------------------------------------------------------------------
+# Workflow
+# ------------------------------------------------------------------------------
+alias note='vim ~/Dropbox/documents/notes.md'
+alias imp='vim ~/Dropbox/documents/imputaciones.md'
 
 # ------------------------------------------------------------------------------
 # Current working projects
@@ -35,11 +41,14 @@ alias prep='rm -r www/*; cp -r www-dev/* www/'
 alias andr='prep && cordova prepare android && cordova run android'
 
 # ATSistemas
-alias at='cd $HOME/repos/atsistemas'
-alias mlm='cd $HOME/repos/atsistemas/mlm'
+alias at='cd $HOME/repos/atsistemas; ls -lh'
+
+alias mlm='cd $HOME/repos/atsistemas/mlm; ls -lh'
 alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -lh'
 alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -lh'
 alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -lh'
+
+alias silk='cd ~/repos/atsistemas/silk; ls -lh'
 
 # Reset completely the mlm-back-v2 database
 alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
@@ -47,8 +56,6 @@ alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
 # Personal
 alias gde='cd ~/repos/gamedev; ls -lh'
 alias ca='cd ~/repos/gamedev/mincaf; ls -lh'
-
-# Servers
 
 # ------------------------------------------------------------------------------
 
