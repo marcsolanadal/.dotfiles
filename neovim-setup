@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# NOTE: We need to have xcode installed.
+
+# ask for the administrator password upfront
+sudo -v
+
+# delete previous installation
+rm -rf neovim
+
+# install dependencies
+xcode-select --install
+brew install libtool automake cmake pkg-config gettext
+
+# download sources
+git clone https://github.com/neovim/neovim.git
+
+# move to folder
+cd neovim
+
+# clean and build
+make distclean && make
+
+# install neovim from repo
+#brew tap neovim/homebrew-neovim
+#brew install --HEAD neovim
+
+# copy config files
+#cp -rf ~/.vim ~/.nvim
+
+#curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

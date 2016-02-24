@@ -4,9 +4,21 @@ ZSH_THEME="ionthas"
 
 zstyle ':completion:*' insert-tab false
 
+# Attaches the current docker environment to shell
+eval $(docker-machine env default)
+
+# Attach ssh keys to agent
+ssh-add .ssh/ionid
+
+export REDIS_HOST=192.168.99.100
+export REDIS_PORT=7777
+
 # ------------------------------------------------------------------------------
 # Productivity
 # ------------------------------------------------------------------------------
+
+# Common
+alias vim='nvim'
 
 # Git
 alias gg='git log --oneline --graph --all --decorate'
@@ -47,7 +59,14 @@ alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -lh'
 alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -lh'
 alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -lh'
 
-alias silk='cd ~/repos/atsistemas/silk; ls -lh'
+# CaixaBank
+alias silk='cd ~/repos/atsistemas/silk/; ls -lh'
+
+# FCB
+alias fcbs='cd ~/repos/atsistemas/fcbme/specification; ls -lh'
+alias fcbp='cd ~/repos/atsistemas/fcbme/project; ls -lh'
+alias fcbd='cd ~/repos/atsistemas/fcbme/documentation; ls -lh'
+
 
 # Reset completely the mlm-back-v2 database
 alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'

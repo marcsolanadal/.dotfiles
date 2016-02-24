@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# Install Homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install caskroom/cask/brew-cask
+
+# ------------------------------------------------------------------------------
+# System
+# ------------------------------------------------------------------------------
+brew install ag
+
+# ------------------------------------------------------------------------------
+# Node
+# ------------------------------------------------------------------------------
+brew install node
+npm install -g n
+n latest
+npm install -g gulp
+npm install -g cordova
+npm install -g browser-sync
+npm install -g browserify
+npm install -g stylus
+npm install -g ionic
+npm install -g hexo
+npm install -g hexo-server
+npm install -g nodemon
+
+# ------------------------------------------------------------------------------
+# Git
+# ------------------------------------------------------------------------------
+brew install git
+git config --global user.name "Marc Sola Nadal"
+git config --global user.email "ionthasMail@gmail.com"
+git config --global push.default current
+
+# ------------------------------------------------------------------------------
+# Apps
+# ------------------------------------------------------------------------------
+brew cask install google-chrome
+brew cask install dropbox
+brew cask install java
+brew cask install transmission
+brew cask install skype
+brew cask install virtualbox
+brew cask install vox
+brew cask install genymotion
+brew cask install android-studio
+brew cask install smartgit
+brew cask install dash
+brew cask install slack
+brew cask install pandoc
+brew cask install basictex
+
