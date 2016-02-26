@@ -70,8 +70,6 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 
-let g:netrw_liststyle=3
-
 " visual
 set list                 " Show tabs, trail spaces and invisible spaces
 set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
@@ -83,6 +81,7 @@ let g:lightline = {
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrows=0
 
 " --------------------------------------------------------------
 " Mappings
@@ -109,12 +108,17 @@ nnoremap <leader>h :split<CR>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>ez :e ~/.zshrc<CR>
 
+" Buffer management
+nnoremap <Esc><Esc> :close<CR>
+nnoremap <leader>w :w!<CR>
+
 " Navigation
 nnoremap <leader>c :term<CR>
-"nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
 " Improved window movement
+tnoremap <Esc> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
@@ -149,17 +153,13 @@ let g:ctrlp_custom_ignore = '\v[/\](node_modules|target|dist)|(\.(swp|ico|git|sv
 nnoremap  <leader>f :CtrlP .<CR>
 nnoremap \ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Set spelling for comments
-if has('spell')
-    au BufRead,BufNewFile *.md setlocal spell
-    au FileType gitcommit setlocal spell
-endif
 
 " --------------------------------------------------------------
-" Nevernote
+" vim-simple-notes
 " --------------------------------------------------------------
 
-let g:NNRootPath="~/Dropbox/nevernote/notes"
+let g:notes_directory="~/Dropbox/blog/notes"
+let g:notes_extension=".md"
 
 function! GetInput(prompt)
     let curline = getline('.')
@@ -169,51 +169,73 @@ function! GetInput(prompt)
     return input
 endfunction
 
-function! CreateMarkdown()
-    let filename = GetInput('Filename: ')
-    if filename
-        silent execute "!" . "mkdir " . g:NNRootPath
-        silent execute "vs " . g:NNRootPath . "/" . filename . ".md"
-    endif
-endfunction
-
-function! SelectMarkdown()
+" TODO: show message if no notes available
+function! ListNotes()
     let notes = {}
-    let files = split(globpath(g:NNRootPath, '*.md'), '\n')
+    let files = split(globpath(g:notes_directory, '*' . g:notes_extension), '\n')
     let num = 0
     for i in files
         let num += 1
         let notes[num] = i
         echo num . " - " . fnamemodify(i, ":t:r")
     endfor
-    let noteNum = GetInput('Note: ')
-    if noteNum
-        silent execute "vs " . notes[noteNum]
+    return notes
+endfunction
+
+function! CreateNote()
+    let filename = GetInput('Filename: ')
+    if !empty(filename)
+        silent execute "!" . "mkdir -p " . g:notes_directory
+        silent execute "vs " . g:notes_directory . "/" . filename . g:notes_extension
     endif
 endfunction
 
-nnoremap <leader>nn :call CreateMarkdown()<CR>
-nnoremap <leader>nl :call SelectMarkdown()<CR>
-
-" --------------------------------------------------------------
-
-" Switching buffers with numbers
-function! BufferSwitch()
-    buffers
-    let curline = getline('.')
-    call inputsave()
-    let num = input('Buffer num: ')
-    call inputrestore()
-    execute "buffer " . num
+" TODO: check valid note number
+function! RemoveNote()
+    let notes = ListNotes()
+    let num = GetInput('Note to remove: ')
+    if !empty(num) && filereadable(notes[num])
+        silent execute "!rm -rf " . notes[num]
+    endif
 endfunction
-nnoremap <leader>b :call BufferSwitch("~/Dropbox/nevernote/notes")<CR>
+
+function! SelectNote()
+    let notes = ListNotes()
+    let num = GetInput('Note: ')
+    if !empty(num)
+        silent execute "vs " . notes[num]
+    endif
+endfunction
+
+nnoremap <leader>nc :call CreateNote()<CR>
+nnoremap <leader>nr :call RemoveNote()<CR>
+nnoremap <leader>nn :call SelectNote()<CR>
 
 " --------------------------------------------------------------
 " Autocommands
 " --------------------------------------------------------------
 if has('autocmd')
+
+    " Set spelling for comments
+    if has('spell')
+        au BufRead,BufNewFile *.md setlocal spell
+        au FileType gitcommit setlocal spell
+    endif
+
+    " Trim whitespaces from all filetypes
     au BufWritePre * :%s/\s\+$//e
-    au FileType js,java setlocal comments-=:// comments+=f://
+
+    " README files are markdown
     au BufNewFile,BufRead README set filetype=markdown
+
+    " Reaload init.vim on save
     au! BufWritePost init.vim source %
+
+    " Controls the behaviour when entring/leaving the terminal
+    au BufWinEnter,WinEnter term://* startinsert
+    au BufLeave term://* stopinsert
+
+    " Disable auto commenting in general
+    au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 endif
