@@ -62,18 +62,15 @@ alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -lh'
 # CaixaBank
 alias silk='cd ~/repos/atsistemas/silk/; ls -lh'
 
-# FCB
-alias fcbs='cd ~/repos/atsistemas/fcbme/specification; ls -lh'
-alias fcbp='cd ~/repos/atsistemas/fcbme/project; ls -lh'
-alias fcbd='cd ~/repos/atsistemas/fcbme/documentation; ls -lh'
-
-
 # Reset completely the mlm-back-v2 database
 alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
 
 # Personal
 alias gde='cd ~/repos/gamedev; ls -lh'
-alias ca='cd ~/repos/gamedev/mincaf; ls -lh'
+alias pet='cd ~/repos/pet; ls -lh'
+
+# Notes
+alias nn='cd ~/Dropbox/blog/notes; ls -lh'
 
 # ------------------------------------------------------------------------------
 
