@@ -30,15 +30,12 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'keith/investigate.vim'
-Plug 'wikitopian/hardmode'
+Plug 'marcsolanadal/vim-simple-notes'
 
 " Web development
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
-
-" Objective-C
-"Bundle "b4winckler/vim-objc"
 
 call plug#end()
 
@@ -75,13 +72,15 @@ set list                 " Show tabs, trail spaces and invisible spaces
 set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
 set showbreak=↪          " Character showed when line break
 
-let g:lightline = {
-            \ 'colorscheme': 'wombat'
-            \ }
+set spelllang=en_us
+
+let g:lightline = { 'colorscheme': 'wombat' }
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeDirArrows=0
+
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
 
 " --------------------------------------------------------------
 " Mappings
@@ -110,6 +109,7 @@ nnoremap <leader>ez :e ~/.zshrc<CR>
 
 " Buffer management
 nnoremap <Esc><Esc> :close<CR>
+tnoremap <Esc><Esc> <C-\><C-n>:close<CR>
 nnoremap <leader>w :w!<CR>
 
 " Navigation
@@ -153,66 +153,8 @@ let g:ctrlp_custom_ignore = '\v[/\](node_modules|target|dist)|(\.(swp|ico|git|sv
 nnoremap  <leader>f :CtrlP .<CR>
 nnoremap \ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-
 " --------------------------------------------------------------
-" vim-simple-notes
-" --------------------------------------------------------------
-
-let g:notes_directory="~/Dropbox/blog/notes"
-let g:notes_extension=".md"
-
-function! GetInput(prompt)
-    let curline = getline('.')
-    call inputsave()
-    let input = input(a:prompt)
-    call inputrestore()
-    return input
-endfunction
-
-" TODO: show message if no notes available
-function! ListNotes()
-    let notes = {}
-    let files = split(globpath(g:notes_directory, '*' . g:notes_extension), '\n')
-    let num = 0
-    for i in files
-        let num += 1
-        let notes[num] = i
-        echo num . " - " . fnamemodify(i, ":t:r")
-    endfor
-    return notes
-endfunction
-
-function! CreateNote()
-    let filename = GetInput('Filename: ')
-    if !empty(filename)
-        silent execute "!" . "mkdir -p " . g:notes_directory
-        silent execute "vs " . g:notes_directory . "/" . filename . g:notes_extension
-    endif
-endfunction
-
-" TODO: check valid note number
-function! RemoveNote()
-    let notes = ListNotes()
-    let num = GetInput('Note to remove: ')
-    if !empty(num) && filereadable(notes[num])
-        silent execute "!rm -rf " . notes[num]
-    endif
-endfunction
-
-function! SelectNote()
-    let notes = ListNotes()
-    let num = GetInput('Note: ')
-    if !empty(num)
-        silent execute "vs " . notes[num]
-    endif
-endfunction
-
-nnoremap <leader>nc :call CreateNote()<CR>
-nnoremap <leader>nr :call RemoveNote()<CR>
-nnoremap <leader>nn :call SelectNote()<CR>
-
-" --------------------------------------------------------------
-" Autocommands
+" Auto Commands
 " --------------------------------------------------------------
 if has('autocmd')
 
