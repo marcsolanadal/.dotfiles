@@ -17,10 +17,16 @@ export REDIS_PORT=7777
 # Productivity
 # ------------------------------------------------------------------------------
 
-# Common
+# Program alias
 alias vim='nvim'
 
+# Improved navigation
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
 # Git
+alias ga='git add .'
 alias gg='git log --oneline --graph --all --decorate'
 alias gl='git log --all --decorate'
 alias gs='git status'
@@ -31,17 +37,17 @@ alias grh='git reset --hard HEAD'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 
+# Docker
+
 # ------------------------------------------------------------------------------
 # Remote servers
 # ------------------------------------------------------------------------------
-alias devbox='ssh -i ~/.ssh/ionid ionthas@95.85.12.4'
-alias bbg='ssh -i ~/.ssh/ionid bug@bigbuggames.com'
+alias devbox='ssh ionthas@95.85.12.4'
+alias bbg='ssh bug@bigbuggames.com'
 
 # ------------------------------------------------------------------------------
 # Workflow
 # ------------------------------------------------------------------------------
-alias note='vim ~/Dropbox/documents/notes.md'
-alias imp='vim ~/Dropbox/documents/imputaciones.md'
 
 # ------------------------------------------------------------------------------
 # Current working projects
@@ -67,7 +73,7 @@ alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
 
 # Personal
 alias gde='cd ~/repos/gamedev; ls -lh'
-alias pet='cd ~/repos/pet; ls -lh'
+alias toy='cd ~/repos/toy; ls -lh'
 
 # Notes
 alias nn='cd ~/Dropbox/blog/notes; ls -lh'
