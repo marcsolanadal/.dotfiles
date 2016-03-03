@@ -181,3 +181,19 @@ if has('autocmd')
     au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 endif
+
+" TODO: Neovim thread open cmus on start if flag is enabled
+" TODO: Browse tmux collections
+function! CmusToogle()
+    let flag = 0
+    if flag
+        silent exec "!cmus-remote --play"
+        let flag = 1
+    else
+        silent exec "!cmus-remote --pause"
+    endif
+endfunction
+nnoremap <silent> <leader>c<space> :call CmusToogle()<CR>
+nnoremap <silent> <leader>cn :silent exec "!cmus-remote --next"<CR>
+nnoremap <silent> <leader>cp :silent exec "!cmus-remote --prev"<CR>
+
