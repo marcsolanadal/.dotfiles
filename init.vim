@@ -165,7 +165,7 @@ if has('autocmd')
     endif
 
     " Trim whitespaces from all filetypes
-    au BufWritePre * :%s/\s\+$//e
+    "au BufWritePre * :%s/\s\+$//e
 
     " README files are markdown
     au BufNewFile,BufRead README set filetype=markdown

@@ -7,7 +7,10 @@ brew install caskroom/cask/brew-cask
 # ------------------------------------------------------------------------------
 # System
 # ------------------------------------------------------------------------------
+brew install git
 brew install ag
+brew install htop
+brew install cmus
 
 # ------------------------------------------------------------------------------
 # Node
@@ -26,23 +29,13 @@ npm install -g hexo-server
 npm install -g nodemon
 
 # ------------------------------------------------------------------------------
-# Git
-# ------------------------------------------------------------------------------
-brew install git
-git config --global user.name "Marc Sola Nadal"
-git config --global user.email "ionthasMail@gmail.com"
-git config --global push.default current
-
-# ------------------------------------------------------------------------------
 # Apps
 # ------------------------------------------------------------------------------
 brew cask install google-chrome
 brew cask install dropbox
-brew cask install java
 brew cask install transmission
 brew cask install skype
 brew cask install virtualbox
-brew cask install vox
 brew cask install genymotion
 brew cask install android-studio
 brew cask install smartgit
@@ -50,4 +43,3 @@ brew cask install dash
 brew cask install slack
 brew cask install pandoc
 brew cask install basictex
-
