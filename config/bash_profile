@@ -1,9 +1,12 @@
 # Adding ssh keys to agent
 ssh-add $HOME/.ssh/ionid
-ssh-add $HOME/.ssh/msola-at
+ssh-add $HOME/.ssh/atid
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$JAVA_HOME:$(/usr/libexec/java_home)/bin
 
 # Load the default .profile
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+#[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
 # Load default .bashrc
 [[ -f ~/.bashrc ]] && source ~/.bashrc

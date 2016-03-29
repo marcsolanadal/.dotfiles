@@ -150,8 +150,8 @@ if executable('ag')
 endif
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[/\](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-nnoremap  <leader>f :CtrlP .<CR>
-nnoremap \ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>f :CtrlP .<CR>
+nnoremap <silent> \ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " --------------------------------------------------------------
 " Auto Commands
@@ -184,16 +184,17 @@ endif
 
 " TODO: Neovim thread open cmus on start if flag is enabled
 " TODO: Browse tmux collections
+let g:cmus_playing = 0
 function! CmusToogle()
-    let flag = 0
-    if flag
+    if g:cmus_playing
         silent exec "!cmus-remote --play"
-        let flag = 1
+        let g:cmus_playing = 1
     else
         silent exec "!cmus-remote --pause"
+        let g:cmus_playing = 0
     endif
 endfunction
-nnoremap <silent> <leader>c<space> :call CmusToogle()<CR>
+nnoremap <silent> <leader><space> :call CmusToogle()<CR>
 nnoremap <silent> <leader>cn :silent exec "!cmus-remote --next"<CR>
 nnoremap <silent> <leader>cp :silent exec "!cmus-remote --prev"<CR>
 
