@@ -16,6 +16,9 @@ ln -s ~/.dotfiles/config/gitmessage ~/.gitmessage
 # We need Python and Lua for the Ultisnips and Neocomplete plugins
 ./scripts/build_vim.sh
 
+# Adding the global profile for the user
+sudo cp -rf ~/.dotfiles/config/profile /etc/profile
+
 # Removing vim's previous configurations and creating symlinks
 rm -rf ~/.vim ~/.vimrc
 ln -s ~/.dotfiles/config/vimrc ~/.vimrc
