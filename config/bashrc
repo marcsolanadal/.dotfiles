@@ -78,6 +78,7 @@ alias nn='cd ~/Dropbox/blog/notes; ls -lh'
 # ------------------------------------------------------------------------------
 
 source ~/.dotfiles/config/git-prompt.sh 
+export GIT_PS1_SHOWDIRTYSTATE=1
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
