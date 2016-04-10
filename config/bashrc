@@ -42,6 +42,10 @@ alias gcd='git checkout develop'
 alias devbox='ssh ionthas@95.85.12.4'
 alias bbg='ssh bug@bigbuggames.com'
 
+alias pre='ssh mlm@192.168.3.126'
+alias preback='ssh -t mlm@192.168.3.126 "cd /Users/mlm/.jenkins/jobs/MLM_Backend_dev/workspace; bash"'
+alias prefold='ssh -t mlm@192.168.3.126 "cd /Users/mlm/mlmdata; bash"'
+
 # ------------------------------------------------------------------------------
 # Workflow
 # ------------------------------------------------------------------------------
@@ -56,14 +60,12 @@ alias andr='prep && cordova prepare android && cordova run android'
 
 # ATSistemas
 alias at='cd $HOME/repos/atsistemas; ls -lh'
-
 alias mlm='cd $HOME/repos/atsistemas/mlm; ls -lh'
 alias m2='cd $HOME/repos/atsistemas/mlm/mlm-back-v2; ls -lh'
 alias mu='cd $HOME/repos/atsistemas/mlm/user-case-tests; ls -lh'
 alias mh='cd $HOME/repos/atsistemas/mlm/hybreed-cli-mlm-module; ls -lh'
-
-# CaixaBank
 alias silk='cd ~/repos/atsistemas/silk/; ls -lh'
+alias hipra='cd ~/repos/atsistemas/hipra/HIPRAlink/HipraLink; ls -lh'
 
 # Reset completely the mlm-back-v2 database
 alias rdb='gulp reset &; sleep 4 && gulp populate && kill $!'
@@ -80,6 +82,14 @@ alias nn='cd ~/Dropbox/blog/notes; ls -lh'
 source ~/.dotfiles/config/git-prompt.sh 
 export GIT_PS1_SHOWDIRTYSTATE=1
 
+COLUMNS=250
+
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+white=$(tput setaf 7)
+reset=$(tput sgr0)
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
   screen-256color)  color_prompt=yes
@@ -89,9 +99,10 @@ if [ "$color_prompt" = yes ]; then
     if [ "$(whoami)" == 'root' ]; then
         PS1='\[\e[33m\]\w $ \[\e[0m\]'
     else
-        PS1='\e[1m\w\e[m\e[33m$(__git_ps1)\e[m \[\e[32m\]>\[\e[33m\]>\[\e[31m\]> \[\e[0m\]'
+        PS1='\[$white\]\w\[$yellow\]$(__git_ps1) \[$green\]>\[$yellow\]>\[$red\]> \[$reset\]'
     fi
 else
     PS1='\w $ '
 fi
-unset color_prompt force_color_prompt
+
+LS_COLORS=$LS_COLORS:'di=0;35'

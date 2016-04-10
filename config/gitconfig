@@ -2,7 +2,7 @@
 	name = Marc Solà Nadal
 	email = ionthasMail@gmail.com
 [core]
-	editor = vim
+	editor = nvim
 	autocrlf = input
 [commit]
   template = ~/.gitmessage
