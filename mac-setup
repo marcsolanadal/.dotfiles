@@ -48,3 +48,6 @@ brew cask install android-studio
 brew cask install slack
 brew cask install pandoc
 brew cask install basictex
+brew cask install iterm
+brew cask install filezilla
+brew cask install vox

@@ -156,6 +156,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[/\](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 nnoremap <leader>f :CtrlP .<CR>
 nnoremap <silent> \ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"nnoremap <silent> | :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " --------------------------------------------------------------
 " Auto Commands

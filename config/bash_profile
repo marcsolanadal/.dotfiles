@@ -6,6 +6,8 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export PATH=$PATH:/usr/local/
 
+#eval "$(docker-machine env default)"
+
 # Load the default .profile
 #[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
