@@ -1,5 +1,8 @@
-export JAVA_HOME=$(/usr/libexec/java_home)
-export JAVA_HOME=$JAVA_HOME:$(/usr/libexec/java_home)/bin
+#export JAVA_HOME=$(/usr/libexec/java_home)
+#export JAVA_HOME=$JAVA_HOME:$(/usr/libexec/java_home)/bin
+
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export PATH=$PATH:/usr/local/
 

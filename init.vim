@@ -24,6 +24,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
 
 " Utils
 Plug 'editorconfig/editorconfig-vim'
@@ -36,6 +37,8 @@ Plug 'marcsolanadal/vim-simple-notes'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -105,7 +108,8 @@ nnoremap <leader>h :split<CR>
 
 " Quick access to configuration files
 nnoremap <leader>ev :e $MYVIMRC<CR>
-nnoremap <leader>ez :e ~/.zshrc<CR>
+nnoremap <leader>eb :e ~/.bashrc<CR>
+nnoremap <leader>et :e ~/.tmux.conf<CR>
 
 " Buffer management
 nnoremap <Esc><Esc> :close<CR>
@@ -198,3 +202,45 @@ nnoremap <silent> <leader><space> :call CmusToogle()<CR>
 nnoremap <silent> <leader>cn :silent exec "!cmus-remote --next"<CR>
 nnoremap <silent> <leader>cp :silent exec "!cmus-remote --prev"<CR>
 
+" --------------------------------------------------------------
+" Plugins
+" --------------------------------------------------------------
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#disable_auto_complete = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" omnifuncs
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+augroup end
+
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+endif
+
+" deoplete tab-complete
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+" ,<Tab> for regular tab
+inoremap <Leader><Tab> <Space><Space>
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" neomake linting
+autocmd! BufWritePost * Neomake
+let g:neomake_open_list = 2
+
+" emmet
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+nnoremap <leader>e <C-y>,
