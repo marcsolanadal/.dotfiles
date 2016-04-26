@@ -18,9 +18,11 @@ alias vim='nvim'
 alias grep='grep --color=auto'
 alias tree='tree -L 2 | more'
 alias rm='rm -rf'
+alias l='ls -lah'
 alias ls='ls -lah'
 
 # Improved navigation
+alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'

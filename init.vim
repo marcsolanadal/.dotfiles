@@ -244,4 +244,4 @@ let g:neomake_open_list = 2
 " emmet
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
-nnoremap <leader>e <C-y>,
+nnoremap <Leader>e <C-y>,

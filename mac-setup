@@ -26,7 +26,7 @@ npm install -g cordova
 npm install -g browser-sync
 npm install -g browserify
 npm install -g stylus
-npm install -g ionic
+#npm install -g ionic
 #npm install -g hexo
 #npm install -g hexo-server
 npm install -g nodemon
@@ -37,17 +37,15 @@ npm install -g webpack
 # ------------------------------------------------------------------------------
 brew cask install google-chrome
 brew cask install iterm2 
-#brew cask install dropbox 
 brew cask install transmission
-#brew cask install skype
+brew cask install skype
 brew cask install virtualbox
 brew cask install genymotion
 brew cask install android-studio
-#brew cask install smartgit
-#brew cask install dash
+brew cask install smartgit
 brew cask install slack
 brew cask install pandoc
 brew cask install basictex
-brew cask install iterm
 brew cask install filezilla
 brew cask install vox
+brew cask install spectacle
