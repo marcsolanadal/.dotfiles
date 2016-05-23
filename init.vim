@@ -231,9 +231,9 @@ if exists('g:plugs["tern_for_vim"]')
 endif
 
 " deoplete tab-complete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+"inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 " ,<Tab> for regular tab
-inoremap <Leader><Tab> <Space><Space>
+"inoremap <Leader><Tab> <Space><Space>
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 

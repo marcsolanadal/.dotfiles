@@ -20,7 +20,7 @@ brew install tree
 # ------------------------------------------------------------------------------
 brew install node
 npm install -g n
-n latest
+n latest 
 npm install -g gulp
 npm install -g cordova
 npm install -g browser-sync
@@ -42,7 +42,6 @@ brew cask install skype
 brew cask install virtualbox
 brew cask install genymotion
 brew cask install android-studio
-brew cask install smartgit
 brew cask install slack
 brew cask install pandoc
 brew cask install basictex
