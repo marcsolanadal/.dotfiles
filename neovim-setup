@@ -9,9 +9,9 @@ sudo -v
 rm -rf neovim
 
 # install dependencies
-xcode-select --install
-xcodebuild -license
-brew install libtool automake cmake pkg-config gettext
+#xcode-select --install
+#xcodebuild -license
+#brew install libtool automake cmake pkg-config gettext
 
 # download sources
 git clone https://github.com/neovim/neovim.git
@@ -26,7 +26,7 @@ make install
 # remove and copy neovim configuration
 rm -rf ~/.config/nvim
 mkdir -p ~/.config/nvim
-ln -s ~/.dotifles/config.vim ~/.config/nvim/init.vim
+ln -s ~/.dotifles/init.vim ~/.config/nvim/init.vim
 
 # install neovim from repo
 #brew tap neovim/homebrew-neovim
@@ -35,9 +35,12 @@ ln -s ~/.dotifles/config.vim ~/.config/nvim/init.vim
 # copy config files
 #cp -rf ~/.vim ~/.nvim
 
-#curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # fix for tmux-neovim ctrl-h bug
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 tic $TERM.ti
+
+cd ..
+rm -rf ~/.dotfiles/neovim

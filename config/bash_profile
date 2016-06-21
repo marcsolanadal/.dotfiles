@@ -1,6 +1,12 @@
 #export JAVA_HOME=$(/usr/libexec/java_home)
 #export JAVA_HOME=$JAVA_HOME:$(/usr/libexec/java_home)/bin
 
+# Initialization of the ssh agent and addition of our keys
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s` > /dev/null
+  ssh-add ~/.ssh/ionid
+fi
+
 export ANDROID_HOME=/Users/ionthas/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
@@ -16,5 +22,3 @@ export PATH=$PATH:/usr/local/
 
 # Load default .bashrc
 [[ -f ~/.bashrc ]] && source ~/.bashrc
-
-
