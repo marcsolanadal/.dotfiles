@@ -1,0 +1,106 @@
+"*":
+  "atom-material-ui":
+    panelContrast: true
+    themeSyle: "Darker"
+  "atom-ternjs":
+    snippetsFirst: true
+  "autocomplete-plus": {}
+  core:
+    audioBeep: false
+    autoHideMenuBar: true
+    disabledPackages: [
+      "background-tips"
+      "language-coffee-script"
+      "language-csharp"
+      "language-go"
+      "language-hyperlink"
+      "language-c"
+      "language-java"
+      "language-objective-c"
+      "language-perl"
+      "language-php"
+      "language-python"
+      "language-ruby"
+      "language-ruby-on-rails"
+      "language-toml"
+      "emmet"
+      "atom-ternjs"
+    ]
+    packagesWithKeymapsDisabled: []
+    telemetryConsent: "no"
+    themes: [
+      "seti-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    fontFamily: "Fira Code"
+    fontSize: 18
+    invisibles: {}
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true
+    softWrapHangingIndent: 4
+  emmet: {}
+  "exception-reporting":
+    userId: "62db9eba-2b1e-e68f-374e-56f2973301d5"
+  fonts:
+    fontFamily: "FiraCode"
+  "gist-it":
+    newGistsDefaultToPrivate: true
+    userToken: "4d08acb32ba06c9745f39a1f4c325653f17362b9"
+  linter: {}
+  "linter-eslint":
+    globalNodePath: "C:\\Users\\ionthas\\AppData\\Roaming\\npm"
+  "linter-stylelint": {}
+  "markdown-writer":
+    fileExtension: ".md"
+  "one-dark-ui":
+    layoutMode: "Spacious"
+  pigments:
+    markerType: "native-underline"
+  "platformio-ide-terminal":
+    core: {}
+    style:
+      animationSpeed: 4
+      fontSize: "18"
+      theme: "dracula"
+    toggles:
+      runInsertedText: false
+  "project-manager": {}
+  "seti-ui":
+    compactView: true
+    disableAnimations: true
+    themeColor: "Steel"
+  tabs: {}
+  "tree-view": {}
+  "vim-mode": {}
+  welcome:
+    showOnStartup: false
+".babel.regexp.source":
+  editor:
+    softWrapHangingIndent: 120
+".css.scss.source":
+  editor:
+    softWrapAtPreferredLineLength: true
+    softWrapHangingIndent: 4
+".html.jsp.text":
+  editor:
+    softWrapHangingIndent: 120
+".ini.source":
+  editor:
+    softWrapHangingIndent: 4
+".java-properties.source":
+  editor:
+    softWrapHangingIndent: 120
+".java.source":
+  editor:
+    softWrapHangingIndent: 120
+".js.jsx.source":
+  editor:
+    softWrapHangingIndent: 120
+".junit-test-report.text":
+  editor:
+    softWrapHangingIndent: 120
+".sass.source":
+  editor:
+    softWrapHangingIndent: 4
