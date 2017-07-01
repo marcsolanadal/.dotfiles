@@ -1,0 +1,9 @@
+
+# Initialization of the ssh agent and addition of our keys
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s` > /dev/null
+  ssh-add ~/.ssh/id_rsa
+fi
+
+# Load default .bashrc
+[[ -f ~/.bashrc ]] && source ~/.bashrc

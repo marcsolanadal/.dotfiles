@@ -1,0 +1,82 @@
+#! /bin/bash
+
+# Source global definitions
+[[ -f /etc/bashrc ]] && . /etc/bashrc
+
+# General
+export TERM=xterm-256color
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export CYGWIN=winsymlinks:nativestrict
+
+# ------------------------------------------------------------------------------
+# Productivity
+# ------------------------------------------------------------------------------
+
+# Program alias
+alias grep='grep --color=auto'
+alias tree='tree -L 2 -C | more'
+alias rm='rm -rf'
+alias l='ls -lah --color=always'
+alias ls='ls -lah --color=always'
+
+# Improved navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Git
+alias ga='git add .'
+alias gg='git log --oneline --graph --all --decorate'
+alias gl='git log --all --decorate'
+alias gs='git status'
+alias gc='git commit'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias grh='git reset --hard HEAD'
+alias gcm='git checkout master'
+alias gcd='git checkout develop'
+alias gc-='git checkout -'
+
+# ------------------------------------------------------------------------------
+# Remote servers
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Workflow
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Current working projects
+# ------------------------------------------------------------------------------
+alias rep='cd ~/Development/'
+alias aframe='cd ~/Development/a-skeleton/'
+
+# ------------------------------------------------------------------------------
+
+COLUMNS=250
+
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+white=$(tput setaf 7)
+reset=$(tput sgr0)
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+  xterm-256color) color_prompt=yes
+esac
+
+if [ "$color_prompt" = yes ]; then
+    if [ "$(whoami)" == 'root' ]; then
+        PS1='\[\e[33m\]\w $ \[\e[0m\]'
+    else
+        PS1='\[$white\]\w\[$yellow\]$(__git_ps1) \[$green\]>\[$yellow\]>\[$red\]> \[$reset\]'
+    fi
+else
+    PS1='\w $ '
+fi
+
+LS_COLORS=$LS_COLORS:'di=0;35'
